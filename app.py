@@ -33,13 +33,22 @@ config = {
     "messagingSenderId": "773645748479",
     "appId": "1:773645748479:web:b11b5347cec6b6882864ca",
     "measurementId": "G-PJ4V7D84NC",
-    "databaseURL": ""
+    "databaseURL": "https://vlabs-4d54a-default-rtdb.asia-southeast1.firebasedatabase.app/"
 }
 
 firebase = pyrebase.initialize_app(config)
 auth = firebase.auth()
 
 app.secret_key = "secret_invasion"
+
+db = firebase.database()
+
+def increment_counter():
+    counter = db.child("counter").get().val()  # Retrieve the current counter value from the database
+    if counter is None:
+        counter = 0
+    counter += 1
+    db.child("counter").set(counter)
 
 
 @app.route('/register.html', methods=["POST"])
@@ -141,6 +150,7 @@ def outform():
             #print(frequency_of_carrier_signal)
         print(user_input, "POST")
         ASK.ASK_Simulate1(Amplitude_of_carrier_signal,frequency_of_carrier_signal,frequency_of_Pulse_Signal,user_input), ASK.ASK_Simulate2(Amplitude_of_carrier_signal,frequency_of_carrier_signal,frequency_of_Pulse_Signal,user_input), ASK.ASK_Simulate3(Amplitude_of_carrier_signal,frequency_of_carrier_signal,frequency_of_Pulse_Signal,user_input)
+        increment_counter()
         return render_template('sim2.html')
     else:
         user_input = request.form.get('user_input')
@@ -176,6 +186,7 @@ def sim3_1():
         print('\n')
 
         BFSK.BFSK_PLOT1(User_input,Samples,Bit_Rate,frequency_1,frequency_2,Duration,Amplitude,Pulse_Code),BFSK.BFSK_PLOT2(User_input,Samples,Bit_Rate,frequency_1,frequency_2,Duration,Amplitude,Pulse_Code)
+        increment_counter()
 
         return render_template('sim3.html')
 
@@ -208,6 +219,7 @@ def outform1():
             #print(frequency_of_carrier_signal)
         print(user_input, "POST")
         PSK.PSK_Simulate1(Amplitude_of_carrier_signal,frequency_of_carrier_signal,frequency_of_Pulse_Signal,user_input), PSK.PSK_Simulate2(Amplitude_of_carrier_signal,frequency_of_carrier_signal,frequency_of_Pulse_Signal,user_input), PSK.PSK_Simulate3(Amplitude_of_carrier_signal,frequency_of_carrier_signal,frequency_of_Pulse_Signal,user_input)
+        increment_counter()
         return render_template('sim4.html')
     else:
         user_input = request.form.get('user_input')
