@@ -1,5 +1,4 @@
 #Imports
-import sqlite3
 from flask import Flask, render_template, request, session, redirect
 import pyrebase
 import ASK

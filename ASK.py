@@ -1,6 +1,16 @@
 import matplotlib.pylab as plt
 import numpy as num
 
+
+
+# Create a figure and subplots
+fig, axs = plt.subplots(2, 2)
+
+# Access the individual subplots
+ax1 = axs[0, 0]  # First position
+ax2 = axs[0, 1]  # Second position
+ax3 = axs[1, :]  # Third position (spanning multiple columns)
+
 t=num.arange(0,1,0.001)
 
 def ASK_Simulate1(A,F1,F2,user_input):
