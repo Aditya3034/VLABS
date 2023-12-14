@@ -1,0 +1,7 @@
+Flask==2.3.2
+Flask-Limiter==3.5.0
+Flask-SocketIO==5.3.4
+numpy==1.23.5
+Pyrebase
+Pyrebase4
+matplotlib==3.7.1
